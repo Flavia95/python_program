@@ -116,7 +116,7 @@ The *insert_means* and *insert_se* functions are responsible for inserting avera
 -  Must be (TSV) files, that contain values tab-separated.
 -   This is the header that should works:
 ```
-Id	Name	Name2	SpeciesId	Symbol	Alias
+Id    Name    Name2    SpeciesId    Symbol    Alias
 ```
 - Check line endings, lines should ending uses just line feed ("\n").
 -  You shouldn't use data with empty cells.
