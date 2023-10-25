@@ -3,13 +3,14 @@
 This script is designed to insert either average data or standard error data into a database using input from a file.
 These functions collectively provide the necessary functionality to read and manipulate data from the input file and interact with the database to insert data based on the type of data (averages or standard errors) provided.
 
+1. This function takes a heading as input, which is typically a strain alias. It translates strain aliases into canonical names using a dictionary called translations.
 ```
 def translate_alias(heading):
     "Translate strain aliases into canonical names"
     translations = {"B6": "C57BL/6J", "D2": "DBA/2J"}
     return translations.get(heading, heading)
 ```
-This function takes a heading as input, which is typically a strain alias. It translates strain aliases into canonical names using a dictionary called translations.
+2. This function reads the headers (column names) from the input file specified by filepath. It opens the file, reads the first line. It returns the headings as a tuple.
 
 ```
 def read_file_headings(filepath) -> Tuple[str, ...]:
@@ -24,8 +25,8 @@ def read_file_headings(filepath) -> Tuple[str, ...]:
     return headings
 
 ```
-This function reads the headers (column names) from the input file specified by filepath. It opens the file, reads the first line. It returns the headings as a tuple.
-
+3. This function reads the content of the input file specified by filepath. It iterates through the file line by line, skipping the first line, and yields each line's data as a tuple.
+   
 ```
 def read_file_contents(filepath):
     "Get the file contents"
@@ -37,8 +38,8 @@ def read_file_contents(filepath):
                 yield tuple(
                     field.strip() for field in line_contents.split("\t"))
 ```
-This function reads the content of the input file specified by filepath. It iterates through the file line by line, skipping the first line, and yields each line's data as a tuple.
-
+4. This function retrieves information for the strains from the database. It takes a database connection (dbconn), a tuple of strain names, and a species ID as input.
+It constructs a SQL query to fetch strain information for the provided strain names and species ID from the database. The function returns a dictionary where strain names are keys, and the corresponding strain information is the value.
 ```
 def strains_info(
         dbconn: mdb.Connection, strain_names: Tuple[str, ...],
@@ -52,10 +53,7 @@ def strains_info(
         cursor.execute(query, tuple(strain_names) + (speciesid,))
         return {strain["Name"]: strain for strain in cursor.fetchall()}
 ```
-
-This function retrieves information for the strains from the database. It takes a database connection (dbconn), a tuple of strain names, and a species ID as input.
-It constructs a SQL query to fetch strain information for the provided strain names and species ID from the database. The function returns a dictionary where strain names are keys, and the corresponding strain information is the value.
-
+5. This function reads data values from the file, given the file path, headers, and strain information. It reads data values line by line, creating a dictionary for each line, with keys being column names from the header and values as the corresponding data. The function yields these dictionaries.
 ```
 def read_datavalues(filepath, headings, strain_info):
     "Read data values from file"
@@ -69,8 +67,7 @@ def read_datavalues(filepath, headings, strain_info):
                 "DataValue": float(row[sname])
             }
 ```
-This function reads data values from the file, given the file path, headers, and strain information. It reads data values line by line, creating a dictionary for each line, with keys being column names from the header and values as the corresponding data.
-The function yields these dictionaries.
+6. This function retrieves the last ID from the database, specifically from the ProbeSetData table. It constructs an SQL query to find the maximum ID and returns the result as an integer.
 
 ```
 def last_data_id(dbconn: mdb.Connection) -> int:
@@ -79,7 +76,7 @@ def last_data_id(dbconn: mdb.Connection) -> int:
         cursor.execute("SELECT MAX(Id) FROM ProbeSetData")
         return int(cursor.fetchone()[0])
 ```
-This function retrieves the last ID from the database, specifically from the ProbeSetData table. It constructs an SQL query to find the maximum ID and returns the result as an integer.
+7. This function checks if the strains mentioned in the input file's header exist in the database. It takes a list of strains from the file's header and a dictionary of strains from the database. If any strains are in the input file that do not exist in the database, it prints an error message and exits the program.
 
 ```
 def check_strains(headings_strains, db_strains):
@@ -98,8 +95,7 @@ def check_strains(headings_strains, db_strains):
     sys.exit(1)
 
 ```
-This function checks if the strains mentioned in the input file's header exist in the database. It takes a list of strains from the file's header and a dictionary of strains from the database. If any strains are in the input file that do not exist in the database, it prints an error message and exits the program.
-
+8. This function retrieves annotation information from the database. It constructs a SQL query to select annotation information for a specific platform and dataset. The resulting information is organized into dictionaries, where probe names and target IDs are used as keys.
 ```
 def annotationinfo(
         dbconn: mdb.Connection, platformid: int, datasetid: int) -> dict:
@@ -112,9 +108,8 @@ def annotationinfo(
             if bool(item["TargetId"]) else accm[1])
         return (names_dict, targs_dict)
 ```
-This function retrieves annotation information from the database. It constructs a SQL query to select annotation information for a specific platform and dataset. The resulting information is organized into dictionaries, where probe names and target IDs are used as keys.
 
-The insert_means and insert_se functions are responsible for inserting average data or standard error data into the database. They use data extracted from the input file, link strain and annotation information from the database, and then execute insertion queries.
+The *insert_means* and *insert_se* functions are responsible for inserting average data or standard error data into the database. They use data extracted from the input file, link strain and annotation information from the database, and then execute insertion queries.
 
 ### What the data should be?
 
