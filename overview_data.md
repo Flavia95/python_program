@@ -122,3 +122,11 @@ Id    Name    Name2    SpeciesId    Symbol    Alias
 -  You shouldn't use data with empty cells.
 -   No data cells with special characters are allowed, i.e. iie)
 -   For decimal numbers there must be a number to the left side of the dot (e.g. 0.4444)
+
+## If you were to write an uploader yourself, would you do it differently? 
+
+- The folder *script* and *quality_control* are really clear, the written code is easy to understand and fits the aim.
+- I would like to change the structure of the folder:
+1. It is not clear what there is inside etc folder;
+2. 
+3. putting the link of the script or document to connect stuff
