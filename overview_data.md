@@ -128,5 +128,15 @@ Id    Name    Name2    SpeciesId    Symbol    Alias
 - The folder *script* and *quality_control* are really clear, the written code is easy to understand and fits the aim.
 - I would like to change the structure of the folder:
 1. It is not clear what there is inside etc folder;
-2. 
-3. putting the link of the script or document to connect stuff
+2. putting the link of the script or document to connect stuff
+
+## Upload Arabidopsis thaliana data with uploader
+[data](https://gsajournals.figshare.com/articles/dataset/Supplemental_Material_for_Hartanto_et_al_2020/12844358)
+[paper](https://academic.oup.com/g3journal/article/10/11/4215/6048648?login=true)
+
+Results: Researchers investigated the regulation of gene expression during seed germination in Arabidopsis thaliana. They used a method called quantitative trait locus mapping of gene expression (eQTL) at four key germination stages using recombinant inbred lines (RILs). This analysis revealed distinct eQTL landscapes for each stage, with specific hotspots on chromosome five associated with the expression of numerous genes. The researchers constructed a gene co-expression network that highlighted transcription factors DEWAX and ICE1 as potential regulatory genes for one of the major eQTL hotspots.
+
+- Downloaded supplementary tables;
+- Convert excel tables into tab sep files;
+- Upload table-s11 into the [uploader](https://bioart.io/)
+- Errors found: ![Screenshot from 2023-12-05 16-53-42](https://github.com/Flavia95/python_program/assets/52487106/487f40a0-653f-476e-8619-c491cd537696)
