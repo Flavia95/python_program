@@ -134,6 +134,10 @@ Id    Name    Name2    SpeciesId    Symbol    Alias
 [data](https://gsajournals.figshare.com/articles/dataset/Supplemental_Material_for_Hartanto_et_al_2020/12844358)
 [paper](https://academic.oup.com/g3journal/article/10/11/4215/6048648?login=true)
 
+The genetic map for the Hartanto et al dataset is in supplemental table 8 of the paper:
+https://gsajournals.figshare.com/articles/dataset/Supplemental_Material_for_Hartanto_et_al_2020/12844358
+But, the genetype labels have the developmental stage included (ril003_im), that should be removed before including them in the database (so ril003). 
+
 Results: Researchers investigated the regulation of gene expression during seed germination in Arabidopsis thaliana. They used a method called quantitative trait locus mapping of gene expression (eQTL) at four key germination stages using recombinant inbred lines (RILs). This analysis revealed distinct eQTL landscapes for each stage, with specific hotspots on chromosome five associated with the expression of numerous genes. The researchers constructed a gene co-expression network that highlighted transcription factors DEWAX and ICE1 as potential regulatory genes for one of the major eQTL hotspots.
 
 - Downloaded supplementary tables;
