@@ -130,17 +130,43 @@ Id    Name    Name2    SpeciesId    Symbol    Alias
 1. It is not clear what there is inside etc folder;
 2. putting the link of the script or document to connect stuff
 
-## Upload Arabidopsis thaliana data with uploader
+# Upload Arabidopsis thaliana data with uploader
 [data](https://gsajournals.figshare.com/articles/dataset/Supplemental_Material_for_Hartanto_et_al_2020/12844358)
 [paper](https://academic.oup.com/g3journal/article/10/11/4215/6048648?login=true)
-
-The genetic map for the Hartanto et al dataset is in supplemental table 8 of the paper:
-https://gsajournals.figshare.com/articles/dataset/Supplemental_Material_for_Hartanto_et_al_2020/12844358
-But, the genetype labels have the developmental stage included (ril003_im), that should be removed before including them in the database (so ril003). 
 
 Results: Researchers investigated the regulation of gene expression during seed germination in Arabidopsis thaliana. They used a method called quantitative trait locus mapping of gene expression (eQTL) at four key germination stages using recombinant inbred lines (RILs). This analysis revealed distinct eQTL landscapes for each stage, with specific hotspots on chromosome five associated with the expression of numerous genes. The researchers constructed a gene co-expression network that highlighted transcription factors DEWAX and ICE1 as potential regulatory genes for one of the major eQTL hotspots.
 
 - Downloaded supplementary tables;
+
+### 1. Genotype file
+
+*Supplementary Table 8: The genetic map of Bay-0 x Sha parents and the RIL population.*
+
+To add on GN:
+- Change column names (128 columns): the genotype labels have the developmental stage included (bay1_pd), that should be removed before including them in the database (bay1). The problem is that we will have duplicate columns, can we keep this development stage, and have bay1pd, for example?
+-  -1, and 1 should be accepted. NA maybe can be replaced by X.
+
+|bay1_pd|bay2_pd|sha1_pd|sha2_pd|bay1_ar       
+--------------| ----|---------|---------|------
+1 | -1 |  1 |1 | -1 |
+NA | 1 | -1 | NA| 1|
+
+### 2. Phenotype file
+
+*Supplementary Table 10. Phenotype measurements of Bay-0 x Sha parents and the RIL population.* 
+
+- Phenotype columns must have the same labels name of the genotype names. We have 167 columns.
+- Need to add the first column as "ProbeSetID" name
 - Convert excel tables into tab sep files;
-- Upload table-s11 into the [uploader](https://bioart.io/)
-- Errors found: ![Screenshot from 2023-12-05 16-53-42](https://github.com/Flavia95/python_program/assets/52487106/487f40a0-653f-476e-8619-c491cd537696)
+
+
+|ril003_im|ril004_rp|ril005_pd|ril006_im|ril007_rp|
+--------------| ----|---------|---------|------
+|AR.Gmax.ns|0.95|0.89|0.97|0.94|
+|AR.AUC100.ns|47.87|39.97|53.46|51.59|
+
+
+## Issue:
+- Upload table-s10 into the [uploader](https://bioart.io/)
+- Errors found: ![Screenshot from 2023-12-12 17-59-16](https://github.com/Flavia95/python_program/assets/52487106/becf6c4b-77ec-4c77-b0e5-de6030de5dee)
+
